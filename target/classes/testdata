@@ -1,0 +1,21 @@
+Subject
+
+{"subjectId":2,"name":"T2","createdDate":"2022-12-21","updatedDate":null}
+
+question
+
+
+[{"questionId":1,"topicSet":{"tsId":1,"set":{"setId":1,"name":"S1","createdDate":"2022-12-20","updatedDate":null},"topic":{"topicId":1,"name":"T1","createdDate":"2022-12-20","updatedDate":null},"createdDate":"2022-12-20","updatedDate":null},"options":[{"optionId":1,"name":"O1","createdDate":"2022-12-20","updatedDate":null,"anser":{"answerId":1,"createdDate":"2022-12-20","updatedDate":null}}],"name":"उत्तर भारत पर छाई कोहरे की चादर, चंडीगढ़-वाराणसी-लखनऊ की उड़ानें दिल्ली डायवर्ट","createdDate":"2022-12-20","updatedDate":null}]
+
+
+
+sets
+
+{
+    "setId": 2,
+    "name": "S2",
+    "createdDate": "2022-12-20",
+    "updatedDate": null
+}
+
+http://localhost:8080/admin/getQuestionById?subjectId=1&setsId=1

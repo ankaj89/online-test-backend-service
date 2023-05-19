@@ -1,0 +1,4 @@
+#H2-console
+
+1- URL:- http://localhost:8080/h2-console
+2- change :JDBC URL with "jdbc:h2:mem:testdb" in H2 console UI and then connect

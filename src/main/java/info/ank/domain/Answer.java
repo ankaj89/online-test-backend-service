@@ -5,12 +5,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "ANSWER")
@@ -19,12 +19,18 @@ public class Answer implements Serializable{
 	private static final long serialVersionUID = -4009670438836983998L;
 
 	@Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	  @Column(name = "ans_id")
 	  private Integer answerId ;
 	  
 	  @OneToOne
 	  @JoinColumn(name = "opt_id", referencedColumnName = "opt_id")
 	  private Option option ;
+	  
+	  @OneToOne
+	  @JoinColumn(name = "ques_id")
+	  private Question question ;
 	 
 	  @Column(name = "created_date")
 	  private Date createdDate ;
@@ -62,6 +68,14 @@ public class Answer implements Serializable{
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 	  
 	

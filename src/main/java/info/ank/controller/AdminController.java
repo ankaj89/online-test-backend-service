@@ -2,8 +2,10 @@ package info.ank.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import info.ank.domain.Question;
 import info.ank.domain.Sets;
 import info.ank.domain.Subject;
+import info.ank.domain.SubjectSets;
 import info.ank.exception.OnlineTestException;
 import info.ank.model.QuestionDto;
 import info.ank.service.AdminService;
 
 @RestController
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RequestMapping(value = "/admin")
 public class AdminController {
 	
@@ -129,6 +133,14 @@ public class AdminController {
 			return list;
 		}
 		return adminService.getAllSets();
+	}
+	
+	@GetMapping(value = { "/getSetsBySubjectId/{id}"})
+	public List<SubjectSets> getSetsBySubject(@PathVariable(required = true) Integer id) {
+		
+		  return adminService.getSetsBySubject(id);
+		//return subjectAndSets.stream().map(s->s.getSet()).collect(Collectors.toList());
+		 
 	}
 			
 	@GetMapping(value = "/getQuestionBySubjectAndSetsId")

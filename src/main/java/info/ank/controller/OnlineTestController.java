@@ -25,8 +25,8 @@ public class OnlineTestController {
 	@GetMapping(value = "/getQuestionBySubjectAndSetsId")
 	public QuestionWrapperDto getQuestionBySubjectIdAndSetsId (@RequestParam("topicId")Integer topicId,@RequestParam("setsId") Integer setsId,@RequestParam("offSet")Integer offSet,@RequestParam("pageSize") Integer pageSize) {
 
-		return onlineTestService.getQuestionsBySubjectAndSetID(topicId, setsId,offSet,pageSize);
-		
+		QuestionWrapperDto tt= onlineTestService.getQuestionsBySubjectAndSetID(topicId, setsId,offSet,pageSize);
+		return tt;
 	}
 	
 	@PostMapping("/saveAnswer")

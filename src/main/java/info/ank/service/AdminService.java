@@ -1,12 +1,12 @@
 package info.ank.service;
 
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import info.ank.domain.Answer;
 import info.ank.domain.Question;
 import info.ank.domain.Sets;
 import info.ank.domain.Subject;
@@ -74,7 +74,12 @@ public class AdminService {
     	
     	return setsRepository.findBySetId(id);
     }
-      
+   
+     public List<SubjectSets> getSetsBySubject(Integer id) {
+    	
+    	return subjectAndSetRepository.findBySubjectSubjectId(id);
+    }
+   
     public Sets getSetsByName(String name) {
     	
     	return setsRepository.findByName(name);
@@ -87,9 +92,26 @@ public class AdminService {
     
    public void saveQuestion(Question question) {
 	   Date sqlDate= new Date(System.currentTimeMillis());
+	   // question.setQuestionId(20);
 	   question.setCreatedDate(sqlDate);
+	   int id=100;
+	   for(int i=0;i<question.getOptions().size();i++) {
+		
+		   question.getOptions().get(i).setCreatedDate(sqlDate);
+		 //  question.getOptions().get(i).setOptionId(id);
+		   id++;
+		   
+		   if(question.getOptions().get(i).getName().equalsIgnoreCase(question.getAnswer().getOption().getName())) {
+			   question.getAnswer().setOption(question.getOptions().get(i));
+		   }
+	   }
+	   question.getAnswer().setQuestion(question);
+	   //question.getAnswer().setAnswerId(222);
 	   question.getAnswer().setCreatedDate(sqlDate);
-	   question.getOptions().stream().forEach((option)->{option.setCreatedDate(sqlDate);});
+	   
+	
+	   
+	   //question.getOptions().stream().forEach((option)->{option.setCreatedDate(sqlDate);});
 	   questionRepository.save(question);
     	
     }

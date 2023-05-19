@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,12 +25,14 @@ public class Question implements Serializable {
 
 	private static final long serialVersionUID = 5883428670893747629L;
 
-	@Id
-	//  @GeneratedValue
+	 @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @GeneratedValue(strategy = GenerationType.AUTO)
 	  @Column(name = "ques_id")
 	  private Integer questionId ; 
 	  
 	  @OneToOne
+	  @Cascade(CascadeType.ALL)
 	  @JoinColumn(name = "ts_id", referencedColumnName = "ts_id")
 	  private SubjectSets subjectSet ;
 	  
@@ -40,9 +43,10 @@ public class Question implements Serializable {
 	  @Fetch(FetchMode.SUBSELECT)
 	  private List<Option> options;
 	  
-	  @OneToOne( fetch = FetchType.LAZY)
-	  @JoinColumn(name = "ques_id", referencedColumnName = "ques_id",nullable=false)
+	 // @OneToOne//( fetch = FetchType.LAZY,orphanRemoval = true)
+	  //@JoinColumn(name = "ques_id", referencedColumnName = "ques_id")
 	  @Cascade(CascadeType.ALL)
+	  @OneToOne( mappedBy = "question")
 	  private Answer answer;
 	  
 	  @Column(name = "name")
